@@ -56,7 +56,7 @@ class CurrencyMCPClient:
             response.raise_for_status()
             
             # Check if response is SSE format
-            if response.text.startswith('event:'):
+            if response.text.startswith('data:') or response.text.startswith('event:'):
                 return self.parse_sse_response(response.text)
             else:
                 return response.json()
